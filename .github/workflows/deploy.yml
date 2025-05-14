@@ -42,6 +42,8 @@ jobs:
           echo "REMOTE_USER: ${{ vars.REMOTE_USER }}"
           echo "TARGET: ${{ vars.TARGET }}"
           echo "SSH_PRIVATE_KEY: ${{ vars.SSH_PRIVATE_KEY }}"
+          echo "777777777 secrets: ${{ secrets }}"
+          echo "REMOTE_HOST: ${{ secrets.REMOTE_HOST }}"
 
       - name: Setup SSH Key
         run: |
