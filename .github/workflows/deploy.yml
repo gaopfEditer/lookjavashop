@@ -39,6 +39,7 @@ jobs:
           mkdir -p deploy
           cp -r docker deploy/
           cp -r server deploy/
+          cp -r sql deploy/
           mkdir -p deploy/admin
           cp -r admin/dist deploy/admin/
 
@@ -74,4 +75,4 @@ jobs:
 
       - name: Execute Docker container
         run: |
-          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }} && docker-compose up -d"
+          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }}/docker/docker-compose.yml && docker-compose up -d"

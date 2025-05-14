@@ -29,7 +29,7 @@ services:
     #image: amd64/mysql:5.7.29 #arm架构
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 123456
     volumes:
       - ../sql:/likeadmin_java/sql
       - ./data/mysql5.7.29/lib:/var/lib/mysql
@@ -51,15 +51,15 @@ services:
     ports:
       - "6379:6379"
 
-  node:
-    container_name: likeadmin-java-node
-    image: node:14.18.1
-    restart: always
-    volumes:
-      - ../admin:/likeadmin_php/admin
-    networks:
-      - likeadmin
-    tty: true
-    working_dir: /likeadmin_php/admin
-    ports:
-      - "5173:5173"
+  # node:
+  #   container_name: likeadmin-java-node
+  #   image: node:14.18.1
+  #   restart: always
+  #   volumes:
+  #     - ../admin:/likeadmin_php/admin
+  #   networks:
+  #     - likeadmin
+  #   tty: true
+  #   working_dir: /likeadmin_php/admin
+  #   ports:
+  #     - "5173:5173"
