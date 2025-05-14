@@ -30,6 +30,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: likeadmin_db
     volumes:
       - ../sql:/likeadmin_java/sql
       - ./data/mysql5.7.29/lib:/var/lib/mysql
