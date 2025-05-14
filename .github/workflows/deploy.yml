@@ -34,6 +34,14 @@ jobs:
           pnpm install
           pnpm build
 
+      - name: Prepare deployment files
+        run: |
+          mkdir -p deploy
+          cp -r docker deploy/
+          cp -r server deploy/
+          mkdir -p deploy/admin
+          cp -r admin/dist deploy/admin/
+
       - name: Debug Variables
         run: |
           echo "Checking Repository Variables:"
@@ -59,15 +67,11 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ vars.SSH_PRIVATE_KEY }}
           ARGS: '-avzr --delete'
-          SOURCE: ''
+          SOURCE: 'deploy/'
           REMOTE_HOST: ${{ vars.REMOTE_HOST }}
           REMOTE_USER: ${{ vars.REMOTE_USER }}
           TARGET: ${{ vars.TARGET }}
-      
-      # - name: Copy server directory
-      #   run: |
-      #     scp -r ./server ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }}:${{ vars.TARGET }}
 
       - name: Execute Docker container
         run: |
-          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }} && docker-compose -f docker/docker-compose.yml down && docker-compose -f docker/docker-compose.yml up -d"
+          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }} && docker-compose up -d"
