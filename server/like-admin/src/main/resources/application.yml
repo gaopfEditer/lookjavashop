@@ -33,7 +33,7 @@ spring:
       matching-strategy: ant_path_matcher
   # 数据源配置
   datasource:
-    url: jdbc:mysql://biz.g.gaopf.top:3306/likeadmin?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://localhost:3307/likeadmin?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
     type: com.zaxxer.hikari.HikariDataSource # 数据源类型
     driver-class-name: com.mysql.jdbc.Driver # MySql的驱动
     username: root # 数据库账号
@@ -55,9 +55,9 @@ spring:
       enabled: true
   # Redis配置
   redis:
-    host: biz.g.gaopf.top   # Redis服务地址
-    port: 6379        # Redis端口
-    password: foobared        # Redis密码
+    host: localhost   # Redis服务地址
+    port: 6380        # Redis端口
+    password:         # Redis密码
     database: 0       # 数据库索引
     timeout: 5000     # 连接超时
     lettuce:

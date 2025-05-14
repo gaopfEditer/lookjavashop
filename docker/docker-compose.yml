@@ -49,7 +49,7 @@ services:
     networks:
       - likeadmin
     ports:
-      - "6379:6379"
+      - "6380:6379"
 
   # node:
   #   container_name: likeadmin-java-node
