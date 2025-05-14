@@ -25,6 +25,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
+      - name: Change to admin directory
+        run: cd admin
+
       - name: Install dependencies
         run: pnpm install
 
@@ -45,7 +48,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ vars.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan 60.205.120.196 >> ~/.ssh/known_hosts
+          ssh-keyscan ${{ vars.REMOTE_HOST }} >> ~/.ssh/known_hosts
         env:
           SSH_PRIVATE_KEY: ${{ vars.SSH_PRIVATE_KEY }}
 
@@ -58,3 +61,11 @@ jobs:
           REMOTE_HOST: ${{ vars.REMOTE_HOST }}
           REMOTE_USER: ${{ vars.REMOTE_USER }}
           TARGET: ${{ vars.TARGET }}
+      
+      - name: Copy server directory
+        run: |
+          scp -r ./server ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }}:${{ vars.TARGET }}
+
+      - name: Execute Docker container
+        run: |
+          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }} && docker-compose up -d"
