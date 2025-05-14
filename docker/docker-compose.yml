@@ -32,6 +32,7 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: likeadmin_db
     volumes:
+      - ../sql:/docker-entrypoint-initdb.d
       - ../sql:/likeadmin_java/sql
       - ./data/mysql5.7.29/lib:/var/lib/mysql
       - ./config/mysql/mysqld.cnf:/etc/mysql/my.cnf
