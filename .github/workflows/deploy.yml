@@ -75,4 +75,4 @@ jobs:
 
       - name: Execute Docker container
         run: |
-          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }}/docker/docker-compose.yml && docker-compose up -d"
+          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }}/docker && docker-compose up -d"
