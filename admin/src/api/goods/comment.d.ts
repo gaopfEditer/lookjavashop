@@ -1,0 +1,1 @@
+// 列表查询参数类型export type CommentListsQueryParamsType = {    type: number        //查询类型: 0=全部, 1=待回复, 2=已回复    keyword: string     //搜索关键词    searchType: string  //搜索类型: goodsName=商品名称, userSn=用户编号, nickname=用户昵称    level: number       //评价等级: 0=全部, 1=好评, 2=中评, 3=差评    status: number      //评级状态: 0=全部, 1=显示, 2=隐藏    startTime: string   //开始时间    endTime: string     //结束时间}

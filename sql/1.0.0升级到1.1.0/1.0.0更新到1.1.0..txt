@@ -1,0 +1,5 @@
+1.更新表结构sql  structure.sql
+2.更新表数据sql  data.sql
+
+更新数据库后执行以下接口补充旧用户分销数据
+后台域名/api/distribution/store/update

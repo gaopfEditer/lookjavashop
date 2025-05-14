@@ -1,0 +1,1 @@
+// 充值表单类型export interface DepositFormType {    openRecharge: number       // integer 是	充值功能 1开启 0关闭    minRechargeMoney: number   // integer 否	最低充值金额 充值功能=1时需要}

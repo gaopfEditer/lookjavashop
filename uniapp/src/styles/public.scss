@@ -1,0 +1,78 @@
+page {
+    background-color: $u-bg-color;
+    font-size: 28rpx;
+}
+
+page button {
+  margin: 0;
+  background-color: transparent;
+  font-weight: normal;
+  font-size: 28rpx;
+  overflow: unset;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0 30rpx;
+}
+
+page button::after {
+  border: none;
+}
+
+.line-2 {
+  -webkit-line-clamp: 2;
+}
+
+.line-3 {
+  -webkit-line-clamp: 3;
+}
+
+.line-4 {
+  -webkit-line-clamp: 4;
+}
+
+.line-2,
+.line-3,
+.line-4 {
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box; // 弹性伸缩盒
+  -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
+}
+
+// 实体填充镂空
+.full-primary {
+  color: #FFFFFF;
+  background-color: var(--theme-color, #FFC244);
+}
+
+// 主题稳步颜色
+.text-primary {
+    color: var(--theme-color, #FFC244)
+}
+
+// 主题背景颜色
+.bg-primary {
+    background-color: var(--theme-color, #FFC244)
+}
+
+//主题背景渐变
+.bg-primary-linear {
+    background: linear-gradient(90deg, var(--theme-dark-color) 0%, var(--theme-color, #FFC244) 100%)
+}
+
+// 灰色镂空
+.plain-gray {
+    color: #666666;
+    border: 1px solid #666666;
+}
+
+// 主题镂空
+.plain-primary {
+    color: var(--theme-color, #FFC244) !important;
+    border: 1px solid var(--theme-color, #FFC244) !important;
+    background-color: var(--theme-light-color) !important;
+}
+.safe-bottom {
+	height: 120rpx;
+}

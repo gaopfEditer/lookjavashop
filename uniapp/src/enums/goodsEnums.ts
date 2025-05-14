@@ -1,0 +1,1 @@
+// 商品类型枚举export enum GoodsTypeEnum {    ORDINARY = 1,  // 普通商品    SECKILL = 2,   // 秒杀商品    TEAM = 3,      // 拼团商品}

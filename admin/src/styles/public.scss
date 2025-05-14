@@ -1,0 +1,40 @@
+body {
+    @apply text-base text-tx-primary overflow-hidden min-w-[375px];
+}
+.form-tips {
+    @apply text-tx-secondary text-xs leading-6 mt-1;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+
+.line-2 {
+  -webkit-line-clamp: 2;
+}
+
+.line-3 {
+  -webkit-line-clamp: 3;
+}
+
+.line-4 {
+  -webkit-line-clamp: 4;
+}
+
+.line-2,
+.line-3,
+.line-4 {
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box; // 弹性伸缩盒
+  -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
+}
+
+/* NProgress */
+#nprogress .bar {
+    @apply bg-primary #{!important};
+}

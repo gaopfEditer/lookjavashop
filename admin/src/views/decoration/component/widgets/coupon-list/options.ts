@@ -1,0 +1,1 @@
+export default () => ({    title: '优惠券列表',    name: 'coupon-list',    disabled: 1,    content: {},    styles: {}})

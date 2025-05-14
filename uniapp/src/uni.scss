@@ -1,0 +1,41 @@
+@import '@/uni_modules/vk-uview-ui/theme.scss';
+
+$u-main-color: #333333;
+$u-content-color: #666666;
+$u-tips-color: #999999;
+$u-light-color: #c0c4cc;
+$u-border-color: #e5e5e5;
+$u-bg-color: #f5f5f5;
+$u-disabled-color: #c8c9cc;
+
+// $u-type-primary: #FF2C3C;
+// $u-type-primary-light: #ffeefa;
+// $u-type-primary-disabled: #ffe2e3;
+// $u-type-primary-dark: #ec6873;
+$u-type-primary: var(--theme-color);
+$u-type-primary-light: var(--theme-light-color);
+$u-type-primary-disabled: var(--theme-dosabled-color);
+$u-type-primary-dark: var(--theme-dark-color);
+
+$u-type-warning: #ff9900;
+$u-type-warning-disabled: #fcbd71;
+$u-type-warning-dark: #f29100;
+$u-type-warning-light: #fdf6ec;
+
+$u-type-success: #19be6b;
+$u-type-success-disabled: #71d5a1;
+$u-type-success-dark: #18b566;
+$u-type-success-light: #dbf1e1;
+
+$u-type-error: #fa3534;
+$u-type-error-disabled: #fab6b6;
+$u-type-error-dark: #dd6161;
+$u-type-error-light: #fef0f0;
+
+$u-type-info: #909399;
+$u-type-info-disabled: #c8c9cc;
+$u-type-info-dark: #82848a;
+$u-type-info-light: #f4f4f5;
+
+$u-form-item-height: 60rpx;
+$u-form-item-border-color: #e5e5e5;
