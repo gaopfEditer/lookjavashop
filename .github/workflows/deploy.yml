@@ -27,14 +27,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      - name: Change to admin directory
-        run: cd admin
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm build
+      - name: Setup frontend
+        run: |
+          cd admin
+          pnpm install
+          pnpm build
 
       - name: Debug Variables
         run: |
