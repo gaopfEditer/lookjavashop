@@ -62,10 +62,10 @@ jobs:
           REMOTE_USER: ${{ vars.REMOTE_USER }}
           TARGET: ${{ vars.TARGET }}
       
-      - name: Copy server directory
-        run: |
-          scp -r ./server ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }}:${{ vars.TARGET }}
+      # - name: Copy server directory
+      #   run: |
+      #     scp -r ./server ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }}:${{ vars.TARGET }}
 
       - name: Execute Docker container
         run: |
-          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }} && docker-compose up -d"
+          ssh ${{ vars.REMOTE_USER }}@${{ vars.REMOTE_HOST }} "cd ${{ vars.TARGET }} && docker-compose -f docker/docker-compose.yml down && docker-compose -f docker/docker-compose.yml up -d"
