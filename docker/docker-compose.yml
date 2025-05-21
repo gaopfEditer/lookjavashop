@@ -6,24 +6,18 @@ networks:
 
 services:
 
-  maven:
-    logging:
-      options:
-        max-size: "10m"  # 单个日志文件最大10MB
-        max-file: "3"    # 最多保留3个历史日志文件
-    container_name: likeadmin-java-maven
-    image: maven:3.8.6-openjdk-8
+  app:
+    container_name: likeadmin-java-app
+    build:
+      context: ../server
+      dockerfile: Dockerfile
     restart: always
-    tty: true
-    working_dir: /likeadmin_java/server
-    volumes:
-      - ../server:/likeadmin_java/server
-    networks:
-      - likeadmin
     ports:
       - "8082:8082"
-      - "8083:8083"
-    command: mvn spring-boot:run
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1g
+    networks:
+      - likeadmin
   
 
 

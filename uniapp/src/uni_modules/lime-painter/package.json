@@ -9,12 +9,12 @@
     "生成海报",
     "生成二维码",
     "JSON"
-],
-  "repository": "https://gitee.com/liangei/lime-painter", 
+  ],
+  "repository": "https://gitee.com/liangei/lime-painter",
   "engines": {
     "HBuilderX": "^3.4.14"
   },
-"dcloudext": {
+  "dcloudext": {
     "sale": {
       "regular": {
         "price": "0.00"
@@ -65,19 +65,19 @@
           "阿里": "y",
           "百度": "y",
           "字节跳动": "y",
-        "QQ": "y",
-        "钉钉": "u",
-        "快手": "u",
-        "飞书": "u",
-        "京东": "u"
+          "QQ": "y",
+          "钉钉": "u",
+          "快手": "u",
+          "飞书": "u",
+          "京东": "u"
         },
         "快应用": {
           "华为": "u",
           "联盟": "u"
         },
         "Vue": {
-            "vue2": "y",
-            "vue3": "y"
+          "vue2": "y",
+          "vue3": "y"
         }
       }
     }
@@ -88,5 +88,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "lime-painter": "file:"
+  }
 }
