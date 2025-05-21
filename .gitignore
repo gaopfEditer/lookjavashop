@@ -10,10 +10,11 @@ application-dem.yml
 application-prod.yml
 application-test.yml
 /public/uploads/*
+/logs
 !/public/uploads/index.html
 /到店自提
 # SpecStory explanation file
 .cursorindexingignore
 .specstory/
 # SpecStory explanation file
-.specstory/.what-is-this.md
+.specstory/
