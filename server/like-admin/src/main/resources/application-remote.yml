@@ -31,13 +31,13 @@ spring:
     throw-exception-if-no-handler-found: true
     pathmatch:
       matching-strategy: ant_path_matcher
-  # 数据源配置http://60.205.120.196:8888/files
+  # 数据源配置
   datasource:
-    url: jdbc:mysql://60.205.120.196:3306/likeadmin?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://biz.g.gaopf.top:3306/likeadmin?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
     type: com.zaxxer.hikari.HikariDataSource # 数据源类型
     driver-class-name: com.mysql.jdbc.Driver # MySql的驱动
     username: root # 数据库账号
-    password: b01c044f2e0bf36e # 数据库密码
+    password: 123456 # 数据库密码
     hikari:
       connection-timeout: 30000     # 等待连接分配连接的最大时长(毫秒),超出时长还没可用连接则发送SQLException,默认30秒
       minimum-idle: 5               # 最小连接数

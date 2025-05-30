@@ -1,16 +1,27 @@
 package com.mdd.admin.crontab;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.mdd.admin.service.IOrderManageService;
-import com.mdd.admin.service.impl.OrderManageServiceImpl;
 import com.mdd.common.entity.RechargeOrder;
 import com.mdd.common.entity.delivery.ExpressCompany;
 import com.mdd.common.entity.order.Order;
 import com.mdd.common.entity.order.OrderDelivery;
-import com.mdd.common.entity.user.User;
 import com.mdd.common.entity.user.UserAuth;
 import com.mdd.common.enums.ClientEnum;
 import com.mdd.common.enums.OrderEnum;
@@ -26,18 +37,6 @@ import com.mdd.common.util.AccessTokenUtil;
 import com.mdd.common.util.ListUtils;
 import com.mdd.common.util.StringUtils;
 import com.mdd.common.util.TimeUtils;
-import org.springframework.http.*;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component("wechatMiniExpressSendSyncJob")
 public class WechatMiniExpressSendSyncJob {
@@ -58,42 +57,43 @@ public class WechatMiniExpressSendSyncJob {
 
     //提交到微信
     public void handle() {
-
         // 快递方式
-        List<Order> orderList = orderMapper.selectList(new QueryWrapper<Order>()
-                .eq("delivery_type", OrderEnum.DELIVERY_TYPE_EXPRESS.getCode())
-                .eq("express_is", 1)
-                .eq("pay_is", 1)
-                .eq("pay_way", PaymentEnum.WX_PAY.getCode())
-                .eq("wechat_mini_express_sync", 0)
-                .in("order_status", new ArrayList<Integer>() {{
-                    add(OrderEnum.ORDER_STATUS_TAKE_DELIVER.getCode());
-                    add(OrderEnum.ORDER_STATUS_COMPLETED.getCode());
-                }})
-                .orderByDesc("id")
-                .last("limit 60")
-        );
+        LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Order::getDeliveryType, OrderEnum.DELIVERY_TYPE_EXPRESS.getCode())
+                .eq(Order::getExpressIs, 1)
+                .eq(Order::getPayIs, 1)
+                .eq(Order::getPayWay, PaymentEnum.WX_PAY.getCode())
+                .eq(Order::getWechatMiniExpressSync, 0)
+                .in(Order::getOrderStatus, Arrays.asList(
+                    OrderEnum.ORDER_STATUS_TAKE_DELIVER.getCode(),
+                    OrderEnum.ORDER_STATUS_COMPLETED.getCode()
+                ))
+                .orderByDesc(Order::getId)
+                .last("limit 60");
+        List<Order> orderList = orderMapper.selectList(queryWrapper);
+
         // 自提
-        List<Order> orderListPickup = orderMapper.selectList(new QueryWrapper<Order>()
-                .eq("delivery_type", OrderEnum.DELIVERY_TYPE_PICK.getCode())
-                .eq("pay_is", 1)
-                .eq("pay_way", PaymentEnum.WX_PAY.getCode())
-                .eq("wechat_mini_express_sync", 0)
-                .in("order_status", new ArrayList<Integer>() {{
-                    add(OrderEnum.ORDER_STATUS_WAIT_DELIVER.getCode());
-                    add(OrderEnum.ORDER_STATUS_PICKUP_DELIVER.getCode());
-                    add(OrderEnum.ORDER_STATUS_COMPLETED.getCode());
-                }})
-                .orderByDesc("id")
-                .last("limit 60")
-        );
+        LambdaQueryWrapper<Order> pickupWrapper = new LambdaQueryWrapper<>();
+        pickupWrapper.eq(Order::getDeliveryType, OrderEnum.DELIVERY_TYPE_PICK.getCode())
+                .eq(Order::getPayIs, 1)
+                .eq(Order::getPayWay, PaymentEnum.WX_PAY.getCode())
+                .eq(Order::getWechatMiniExpressSync, 0)
+                .in(Order::getOrderStatus, Arrays.asList(
+                    OrderEnum.ORDER_STATUS_WAIT_DELIVER.getCode(),
+                    OrderEnum.ORDER_STATUS_PICKUP_DELIVER.getCode(),
+                    OrderEnum.ORDER_STATUS_COMPLETED.getCode()
+                ))
+                .orderByDesc(Order::getId)
+                .last("limit 60");
+        List<Order> orderListPickup = orderMapper.selectList(pickupWrapper);
+
         //充值订单
-        List<RechargeOrder> rechargeOrderList = rechargeOrderMapper.selectList(new QueryWrapper<RechargeOrder>()
-                .eq("pay_status", 1)
-                .eq("wechat_mini_express_sync", 0)
-                .orderByDesc("id")
-                .last("limit 60")
-        );
+        LambdaQueryWrapper<RechargeOrder> rechargeWrapper = new LambdaQueryWrapper<>();
+        rechargeWrapper.eq(RechargeOrder::getPayStatus, 1)
+                .eq(RechargeOrder::getWechatMiniExpressSync, 0)
+                .orderByDesc(RechargeOrder::getId)
+                .last("limit 60");
+        List<RechargeOrder> rechargeOrderList = rechargeOrderMapper.selectList(rechargeWrapper);
 
         if (orderList.size() > 0) { //快递配送存在没上传的记录
             for (Order order : orderList) {
