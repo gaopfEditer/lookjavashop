@@ -1,4 +1,4 @@
 FROM openjdk:8-jdk-alpine
 WORKDIR /app
-COPY  /app/target/*.jar app.jar
+COPY server/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
