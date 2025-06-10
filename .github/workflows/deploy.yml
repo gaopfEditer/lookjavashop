@@ -41,6 +41,9 @@ jobs:
           cp -r sql deploy/
           mkdir -p deploy/admin
           cp -r admin/dist deploy/admin/
+          mkdir -p deploy/server
+          cp -r server/Dockerfile deploy/server/
+          cp -r server/like-admin/target/*.jar deploy/server/
 
       - name: Debug Variables
         run: |
